@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code Generator</title>
+  <style>
+    #qrcode {
+      margin: 200px auto;
+      max-width: 80px;
+      text-align: center;
+    }
+    .contains {
+      margin-left: 700px;
+      border-radius: 100px;
+    }
+    h2 {
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <h2>TUTORIAL: Simply right click on the qr code that is generated, and click on copy image OR download image.</h2>
+<div class="contains">
+<input type="text" id="idFID" placeholder="Enter link here">
+<button id="submitBtn">Submit</button> 
+</div>
+<br> <br>
+ 
+<div id="qrcode"></div>
+
+<!-- Include QRCode.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+   
+
+  var inputElement = document.getElementById('idFID');
+  var submitButton = document.getElementById('submitBtn');
+  var qrContainer = document.getElementById('qrcode');
+
+  // Create an empty QRCode object once
+  var qrcode = new QRCode(qrContainer, {
+    width: 128,
+    height: 128,
+    colorDark: "#000000",
+    colorLight: "#3e9471",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  submitButton.addEventListener('click', function() {
+    var smth = inputElement.value.trim();
+
+    if (!smth) {
+      alert("Please enter a valid link or text!");
+      return;
+    }
+
+    // Clear previous QR code
+    qrContainer.innerHTML = "";
+
+    // Generate a new one
+    qrcode = new QRCode(qrContainer, {
+      text: smth,
+      width: 128,
+      height: 128,
+      colorDark: "#000000",
+      colorLight: "#e4e2e8",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  });
+</script>
+
+</body>
+</html>
